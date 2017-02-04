@@ -1,0 +1,22 @@
+sudo: required
+
+services:
+  - docker
+
+jdk:
+  - oraclejdk8
+
+language: java
+
+os:
+  - linux
+
+after_success:
+  # login
+  docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+  # prepare qemu
+  - docker run --rm --privileged multiarch/qemu-user-static:register --reset
+  # build image
+  - docker build -t martensjostrand/rpi-test-service:0.1 .
+  # push image
+  - docker push martensjostrand/rpi-test-service:0.1
