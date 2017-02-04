@@ -1,22 +1,19 @@
 sudo: required
 
 services:
-  - docker
+- docker
 
-jdk:
-  - oraclejdk8
-
-language: java
+language: bash
 
 os:
-  - linux
+- linux
 
 after_success:
-  # login
-  - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
-  # prepare qemu
-  - docker run --rm --privileged multiarch/qemu-user-static:register --reset
-  # build image
-  - docker build -t martensjostrand/rpi-test-service:0.1 .
-  # push image
-  - docker push martensjostrand/rpi-test-service:0.1
+- docker login -u="$DOCKER_USERE" -p="$DOCKER_PWDD"
+- docker run --rm --privileged multiarch/qemu-user-static:register --reset
+- docker build -t martensjostrand/rpi-test-service:0.1 .
+- docker push martensjostrand/rpi-test-service:0.1
+
+env:
+  global:
+    secure: UhGPg9Sbq5LLxi8P6ZD31hrwdpJBsXPSFOY4dN1zXo0bq9L5gDMzFouro91nHfJAQcvmyiZ0/W4jRLw/S/kjXANGMmtN5v5Z+oHgiSzzLzwUcBQD0zGouj0Eo3AQmXGHr3r+1AyWBTb5c0S1Yo/z4KggxGTtaRaDRivTxKINLqwh2h3Wz1ywgazLpo3A2n+vWxuaXH0x9yH0nLlJ9W6KMn+FjnpvPv5u4KGdr7mdMEevQ8UXfJuaweQJxiFJ+4ccgoOyoo4bdLj0GM2gPbCaDMUmpYWfNdRPwVI9FqsKbCVSNI4y1Y/JXar++yQG5ETRfZTFkYKq21N3T2edFnuwHJNKocy57Ho2Vfx1DzPAjUbpEwU+u60o9zDdySS7yYVZAm9EXzcHtwyGEmL+h/hRWsrIBjXi0ci4SJbe+LE2ob2TkSWhXxZkjE0frceSupyc9kV1i0D27HClDfhJcLjJPZ/e3f8x52fP17tDDUVnII5sBdw7Aw7BTDpmAjkj1sZGc2shmkYgGEX7Ap+mO+GQ+n1hOthLP0gOIzxvawqIq1OPI4xGcCUHrlzxO+v30cqksqxuJLyL1hFXfUsm+HKRABQSMzGEguGi3eNvwrvrTNLq6ht+NMa5vUngpQSIBJ6KZdmDrhhaZMCc3LDTRvhwZ7ZBKEF/oIqYa5mkr11Q8gY=
