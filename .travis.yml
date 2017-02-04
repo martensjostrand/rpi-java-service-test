@@ -4,7 +4,7 @@ services:
 language: bash
 os:
 - linux
-after_success:
+script:
 - docker login -u $DOCKER_USER -p $DOCKER_PWD
 - docker run --rm --privileged multiarch/qemu-user-static:register --reset
 - docker build -t martensjostrand/rpi-test-service:0.1 .
